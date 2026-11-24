@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="theme-color" content="#181A1F">
+    <title>MotoParts | Repuestos y Accesorios para Motos</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- TOP BAR CON ENLACES EXTERNOS A TIENDAS EXISTENTES -->
+    <div class="top-bar">
+        <div class="container top-bar__content">
+            <span class="top-bar__promo"><i class="fa-solid fa-truck"></i> Envío gratis a nivel nacional en compras mayores a $50</span>
+            <div class="top-bar__links">
+                <a href="https://motos.mercadolibre.com.ve/" target="_blank" rel="noopener noreferrer" title="Visitar MercadoLibre Motos">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i> MercadoLibre Motos
+                </a>
+                <span class="sep">|</span>
+                <a href="https://www.revzilla.com/" target="_blank" rel="noopener noreferrer" title="Visitar RevZilla">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i> RevZilla
+                </a>
+                <span class="sep">|</span>
+                <button type="button" class="top-link-btn" data-info="ayuda">Ayuda</button>
+                <span class="sep">|</span>
+                <a href="https://wa.me/584120000000" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i> +58 412-000-0000</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- HEADER ESTÁNDAR E-COMMERCE -->
+    <header class="header">
+        <div class="container header__main">
+            <a href="#" class="header__logo" id="logoReset">
+                <i class="fa-solid fa-gear"></i> MOTO<span>PARTS</span>
+            </a>
+
+            <div class="header__search">
+                <input type="search" id="searchInput" placeholder="Buscar repuesto, código o moto (SBR, Horse, GN 125)...">
+                <button type="button" id="searchBtn" aria-label="Buscar"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+
+            <div class="header__actions">
+                <a href="#garaje" class="header__action-item" id="myGarageBtn">
+                    <i class="fa-solid fa-motorcycle"></i>
+                    <div class="action-text">
+                        <small>Mi Garaje</small>
+                        <strong id="selectedBikeLabel">Elegir moto</strong>
+                    </div>
+                </a>
+
+                <button type="button" class="header__cart-btn" id="openCartBtn" aria-label="Abrir carrito">
+                    <div class="cart-icon-wrapper">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <span class="cart-badge" id="cartCount">0</span>
+                    </div>
+                    <div class="cart-text">
+                        <small>Carrito</small>
+                        <strong id="headerCartTotal">$0.00</strong>
+                    </div>
+                </button>
+            </div>
+        </div>
+
+        <!-- MENÚ DE CATEGORÍAS HORIZONTAL -->
+        <nav class="header__nav">
+            <div class="container header__nav-list">
+                <button type="button" class="nav-cat-btn active" data-category="Todas"><i class="fa-solid fa-bars"></i> Todas</button>
+                <button type="button" class="nav-cat-btn" data-category="Motor">Motor</button>
+                <button type="button" class="nav-cat-btn" data-category="Transmisión">Arrastre y Croche</button>
+                <button type="button" class="nav-cat-btn" data-category="Frenos">Frenos</button>
+                <button type="button" class="nav-cat-btn" data-category="Eléctrico">Eléctrico y LED</button>
+                <button type="button" class="nav-cat-btn" data-category="Lubricantes">Aceites y Filtros</button>
+                <button type="button" class="nav-cat-btn" data-category="Cauchos">Cauchos y Suspensión</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- SELECTOR DE MARCA Y MODELO DE MOTO -->
+    <section class="vehicle-finder" id="garaje">
+        <div class="container">
+            <div class="vehicle-finder__box">
+                <div class="vehicle-finder__title">
+                    <i class="fa-solid fa-motorcycle"></i>
+                    <div>
+                        <h3>Elige la marca de tu moto</h3>
+                        <p>Selecciona una marca o modelo para ver todos sus repuestos</p>
+                    </div>
+                </div>
+
+                <div class="vehicle-finder__controls">
+                    <select id="finderBrand" aria-label="Seleccionar marca de moto">
+                        <option value="">1. Selecciona Marca</option>
+                        <option value="Bera">Bera</option>
+                        <option value="Empire">Empire / Keeway</option>
+                        <option value="Suzuki">Suzuki</option>
+                        <option value="Yamaha">Yamaha</option>
+                        <option value="Honda">Honda</option>
+                        <option value="Bajaj">Bajaj</option>
+                        <option value="Toro">Motos Toro</option>
+                        <option value="MD">MD Haojin</option>
+                    </select>
+
+                    <select id="finderModel" disabled aria-label="Seleccionar modelo de moto">
+                        <option value="">2. Todos los modelos (Opcional)</option>
+                    </select>
+
+                    <div class="vehicle-finder__btns">
+                        <button type="button" class="btn btn--primary" id="applyBikeBtn">Ver Piezas</button>
+                        <button type="button" class="btn btn--outline hidden" id="clearBikeBtn" title="Limpiar marca"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BOTONES DE ACCESO RÁPIDO POR MARCA -->
+            <div class="brand-quick-bar" id="brandQuickBar">
+                <button type="button" class="brand-pill active" data-brand="Todas">Todas</button>
+                <button type="button" class="brand-pill" data-brand="Bera">Bera</button>
+                <button type="button" class="brand-pill" data-brand="Empire">Empire / Keeway</button>
+                <button type="button" class="brand-pill" data-brand="Suzuki">Suzuki</button>
+                <button type="button" class="brand-pill" data-brand="Yamaha">Yamaha</button>
+                <button type="button" class="brand-pill" data-brand="Honda">Honda</button>
+                <button type="button" class="brand-pill" data-brand="Bajaj">Bajaj</button>
+                <button type="button" class="brand-pill" data-brand="Toro">Motos Toro</button>
+                <button type="button" class="brand-pill" data-brand="MD">MD Haojin</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- LAYOUT E-COMMERCE DE 2 COLUMNAS -->
+    <main class="main-layout container" id="catalogo">
+        <div class="breadcrumbs">
+            <a href="#" id="breadcrumbHome">Inicio</a> / <span id="breadcrumbCategory">Todos los repuestos</span>
+        </div>
+
+        <div class="shop-container">
+            <!-- OVERLAY FILTROS MÓVIL -->
+            <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+            <!-- SIDEBAR DE FILTROS IZQUIERDO -->
+            <aside class="sidebar" id="filterSidebar">
+                <div class="sidebar__header">
+                    <h3>Filtros</h3>
+                    <div class="sidebar__header-actions">
+                        <button type="button" id="resetAllFilters" class="link-btn">Limpiar todo</button>
+                        <button type="button" id="closeSidebarBtn" class="sidebar-close-btn" aria-label="Cerrar filtros"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
+                </div>
+
+                <div class="filter-block">
+                    <h4>Categoría</h4>
+                    <ul class="filter-list" id="sidebarCategories">
+                        <li><label><input type="radio" name="sideCat" value="Todas" checked> Todas</label></li>
+                        <li><label><input type="radio" name="sideCat" value="Motor"> Motor y Cilindros</label></li>
+                        <li><label><input type="radio" name="sideCat" value="Transmisión"> Kits de Arrastre y Croche</label></li>
+                        <li><label><input type="radio" name="sideCat" value="Frenos"> Frenos</label></li>
+                        <li><label><input type="radio" name="sideCat" value="Eléctrico"> Eléctrico e Iluminación</label></li>
+                        <li><label><input type="radio" name="sideCat" value="Lubricantes"> Aceites y Filtros</label></li>
+                        <li><label><input type="radio" name="sideCat" value="Cauchos"> Cauchos y Suspensión</label></li>
+                    </ul>
+                </div>
+
+                <div class="filter-block">
+                    <h4>Marca de Moto</h4>
+                    <ul class="filter-list" id="sidebarBrands">
+                        <li><label><input type="checkbox" value="Bera" class="brand-checkbox"> Bera</label></li>
+                        <li><label><input type="checkbox" value="Empire" class="brand-checkbox"> Empire / Keeway</label></li>
+                        <li><label><input type="checkbox" value="Suzuki" class="brand-checkbox"> Suzuki</label></li>
+                        <li><label><input type="checkbox" value="Yamaha" class="brand-checkbox"> Yamaha</label></li>
+                        <li><label><input type="checkbox" value="Honda" class="brand-checkbox"> Honda</label></li>
+                        <li><label><input type="checkbox" value="Bajaj" class="brand-checkbox"> Bajaj</label></li>
+                        <li><label><input type="checkbox" value="Toro" class="brand-checkbox"> Motos Toro</label></li>
+                        <li><label><input type="checkbox" value="MD" class="brand-checkbox"> MD Haojin</label></li>
+                        <li><label><input type="checkbox" value="Universal" class="brand-checkbox"> Universal</label></li>
+                    </ul>
+                </div>
+
+                <div class="filter-block">
+                    <h4>Condición / Calidad</h4>
+                    <ul class="filter-list">
+                        <li><label><input type="checkbox" value="Original" class="quality-checkbox"> Original OEM</label></li>
+                        <li><label><input type="checkbox" value="Racing" class="quality-checkbox"> Alto Rendimiento / Racing</label></li>
+                        <li><label><input type="checkbox" value="Genérico" class="quality-checkbox"> Reemplazo Certificado</label></li>
+                    </ul>
+                </div>
+            </aside>
+
+            <!-- ÁREA DE PRODUCTOS -->
+            <section class="catalog-area">
+                <div class="catalog-toolbar">
+                    <div class="toolbar-left">
+                        <button type="button" class="btn-mobile-filters" id="openFiltersBtn">
+                            <i class="fa-solid fa-sliders"></i> Filtros
+                        </button>
+                        <span class="results-count"><strong id="resultsNumber">0</strong> repuestos</span>
+                    </div>
+                    <div class="sort-control">
+                        <label for="sortSelect">Ordenar:</label>
+                        <select id="sortSelect">
+                            <option value="featured">Relevantes</option>
+                            <option value="price-asc">Menor precio</option>
+                            <option value="price-desc">Mayor precio</option>
+                            <option value="rating">Mejor calificados</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="products-grid" id="productsGrid"></div>
+
+                <div class="empty-state hidden" id="emptyState">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <h3>No encontramos repuestos que coincidan con tu búsqueda</h3>
+                    <p>Intenta quitar algún filtro o buscar por el código de la pieza.</p>
+                    <button type="button" class="btn btn--primary" id="emptyResetBtn">Ver todo el catálogo</button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- FOOTER E-COMMERCE CON LOS DOS ENLACES A SITIOS DE VENTAS DE MOTOS -->
+    <footer class="footer">
+        <div class="container footer__grid">
+            <div>
+                <h4>Atención al Cliente</h4>
+                <ul>
+                    <li><button type="button" class="footer-link-btn" data-info="ayuda">Cómo comprar</button></li>
+                    <li><button type="button" class="footer-link-btn" data-info="pagos">Métodos de pago (Zelle, Pago Móvil, Efectivo)</button></li>
+                    <li><button type="button" class="footer-link-btn" data-info="envios">Envíos nacionales (Zoom, MRW, Tealca)</button></li>
+                    <li><button type="button" class="footer-link-btn" data-info="garantia">Política de garantías y devoluciones</button></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Categorías Populares</h4>
+                <ul>
+                    <li><button type="button" class="footer-cat-btn" data-cat="Transmisión">Kits de arrastre y croche</button></li>
+                    <li><button type="button" class="footer-cat-btn" data-cat="Frenos">Pastillas y discos de freno</button></li>
+                    <li><button type="button" class="footer-cat-btn" data-cat="Lubricantes">Aceites sintéticos y minerales 4T</button></li>
+                    <li><button type="button" class="footer-cat-btn" data-cat="Cauchos">Cauchos y suspensión</button></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Portales Aliados de Ventas de Motos</h4>
+                <ul>
+                    <li>
+                        <a href="https://motos.mercadolibre.com.ve/" target="_blank" rel="noopener noreferrer" class="external-portal-link">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i> MercadoLibre Motos (Compra y Venta)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.revzilla.com/" target="_blank" rel="noopener noreferrer" class="external-portal-link">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i> RevZilla (Tienda Internacional de Motos)
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <h4>Contacto y Ubicación</h4>
+                <p><i class="fa-solid fa-location-dot"></i> Av. Principal, Zona Industrial</p>
+                <p><i class="fa-solid fa-clock"></i> Lun - Sáb: 8:00 AM - 5:30 PM</p>
+                <p><i class="fa-brands fa-whatsapp"></i> +58 412-000-0000</p>
+            </div>
+        </div>
+        <div class="footer__bottom">
+            <p>&copy; 2026 MotoParts C.A. - Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- MODAL DE VISTA RÁPIDA E INFORMACIÓN -->
+    <div class="modal-overlay" id="productModalOverlay">
+        <div class="product-modal">
+            <button type="button" class="modal-close" id="closeModalBtn" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <!-- SIDEBAR CARRITO DE COMPRAS -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <aside class="cart-sidebar" id="cartSidebar">
+        <div class="cart-sidebar__header">
+            <h3>Tu Carrito (<span id="sidebarCartCount">0</span>)</h3>
+            <button type="button" id="closeCartBtn" aria-label="Cerrar carrito"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="cart-sidebar__body" id="cartItems"></div>
+        <div class="cart-sidebar__footer">
+            <div class="shipping-progress">
+                <p class="cart-shipping-note" id="shippingNote"><i class="fa-solid fa-truck"></i> Agrega $50.00 para envío gratis</p>
+                <div class="progress-bar"><div class="progress-fill" id="shippingBar"></div></div>
+            </div>
+            <div class="cart-summary-row">
+                <span>Subtotal:</span>
+                <strong id="cartSubtotal">$0.00</strong>
+            </div>
+            <button type="button" class="btn btn--whatsapp" id="checkoutBtn">
+                <i class="fa-brands fa-whatsapp"></i> Completar Pedido por WhatsApp
+            </button>
+        </div>
+    </aside>
+
+    <div class="toast" id="toast">Agregado al carrito</div>
+
+    <script src="script.js"></script>
+</body>
+</html>
